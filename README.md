@@ -19,6 +19,6 @@ For example:<br />
 curl -X GET http://localhost:8080/api/v1/reward-points/rewards/1/2022<br />
 You should get a JSON response similar to this one:<br />
 {"year":2022,"pointsPerMonth":[{"month":"JANUARY","pointsPerYear":0},{"month":"FEBRUARY","pointsPerYear":180},{"month":"APRIL","pointsPerYear":250},{"month":"MAY","pointsPerYear":150},{"month":"AUGUST","pointsPerYear":50},{"month":"SEPTEMBER","pointsPerYear":25}],"pointsPerYear":655}<br />
-Also you can test the application ussing swagger, go to: http://localhost:8080/swagger-ui.html<br />
+Also you can test the application using swagger, go to: http://localhost:8080/swagger-ui.html<br />
 Set the customerId and year and click "Try out!<br />
 <br /><br />
