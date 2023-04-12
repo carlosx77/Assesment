@@ -52,12 +52,12 @@ public class RewardPointsControllerV1Test {
 
         PointsPerMonth januaryPoints = new PointsPerMonth();
         januaryPoints.setMonth(Month.JANUARY);
-        januaryPoints.setPointsPerYear(10);
+        januaryPoints.setPointsPerMonth(10);
         pointsPerMonthList.add(januaryPoints);
 
         PointsPerMonth februaryPoints = new PointsPerMonth();
         februaryPoints.setMonth(Month.FEBRUARY);
-        februaryPoints.setPointsPerYear(15);
+        februaryPoints.setPointsPerMonth(15);
         pointsPerMonthList.add(februaryPoints);
 
         expectedPointsPerYear.setPointsPerMonth(pointsPerMonthList);
