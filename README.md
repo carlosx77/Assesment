@@ -2,7 +2,7 @@
 Assesment
 
 
-To execute this application you need to install
+To execute this application you need to install<br />
 apache-maven-3.9.1
 Openjdk-11.0.2
 Once installed make sure your environment variables are pointing to bin directories of these to applications and that you are using the correct versions.
