@@ -6,7 +6,7 @@ To execute this application you need to install<br />
 apache-maven-3.9.1<br />
 Openjdk-11.0.2<br />
 Once installed make sure your environment variables are pointing to bin directories of these two applications and that you are using the correct versions.<br />
-Then using any git tool checkout this repository: https://github.com/carlosx77/Assesment.git<br />
+Then using any git tool checkout this repository: https://github.com/carlosx77/Assessment.git<br />
 On a CMD navigate to the directory where you checked out the code <br />
 locate and navigate to Assesment/rewardsApp directory<br />
 run: mvn clean install<br />
