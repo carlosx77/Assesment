@@ -21,6 +21,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringUtils;
 
 import springfox.documentation.builders.PathSelectors;
@@ -32,41 +35,41 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableJpaRepositories
 @EnableSwagger2
+@EnableTransactionManagement
 public class RewardsAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RewardsAppApplication.class, args);
 	}
 
-
 	@Bean
 	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select().apis(RequestHandlerSelectors.basePackage("com.carlos.rewardsapp"))
-				.paths(PathSelectors.any()).build();
+		return new Docket(DocumentationType.SWAGGER_2).select()
+				.apis(RequestHandlerSelectors.basePackage("com.carlos.rewardsapp")).paths(PathSelectors.any()).build();
 	}
-	
+
 	@Bean
-	public WebMvcEndpointHandlerMapping webEndpointServletHandlerMapping(
-	    WebEndpointsSupplier webEndpointsSupplier,
-	    ServletEndpointsSupplier servletEndpointsSupplier, ControllerEndpointsSupplier controllerEndpointsSupplier,
-	    EndpointMediaTypes endpointMediaTypes, CorsEndpointProperties corsProperties,
-	    WebEndpointProperties webEndpointProperties, Environment environment) {
-	  List<ExposableEndpoint<?>> allEndpoints = new ArrayList<>();
-	  Collection<ExposableWebEndpoint> webEndpoints = webEndpointsSupplier.getEndpoints();
-	  allEndpoints.addAll(webEndpoints);
-	  allEndpoints.addAll(servletEndpointsSupplier.getEndpoints());
-	  allEndpoints.addAll(controllerEndpointsSupplier.getEndpoints());
-	  String basePath = webEndpointProperties.getBasePath();
-	  EndpointMapping endpointMapping = new EndpointMapping(basePath);
-	  boolean shouldRegisterLinksMapping = shouldRegisterLinksMapping(webEndpointProperties, environment, basePath);
-	  return new WebMvcEndpointHandlerMapping(endpointMapping, webEndpoints, endpointMediaTypes,
-	      corsProperties.toCorsConfiguration(), new EndpointLinksResolver(allEndpoints, basePath),
-	      shouldRegisterLinksMapping);
+	public WebMvcEndpointHandlerMapping webEndpointServletHandlerMapping(WebEndpointsSupplier webEndpointsSupplier,
+			ServletEndpointsSupplier servletEndpointsSupplier, ControllerEndpointsSupplier controllerEndpointsSupplier,
+			EndpointMediaTypes endpointMediaTypes, CorsEndpointProperties corsProperties,
+			WebEndpointProperties webEndpointProperties, Environment environment) {
+		List<ExposableEndpoint<?>> allEndpoints = new ArrayList<>();
+		Collection<ExposableWebEndpoint> webEndpoints = webEndpointsSupplier.getEndpoints();
+		allEndpoints.addAll(webEndpoints);
+		allEndpoints.addAll(servletEndpointsSupplier.getEndpoints());
+		allEndpoints.addAll(controllerEndpointsSupplier.getEndpoints());
+		String basePath = webEndpointProperties.getBasePath();
+		EndpointMapping endpointMapping = new EndpointMapping(basePath);
+		boolean shouldRegisterLinksMapping = shouldRegisterLinksMapping(webEndpointProperties, environment, basePath);
+		return new WebMvcEndpointHandlerMapping(endpointMapping, webEndpoints, endpointMediaTypes,
+				corsProperties.toCorsConfiguration(), new EndpointLinksResolver(allEndpoints, basePath),
+				shouldRegisterLinksMapping);
 	}
-	
-	private boolean shouldRegisterLinksMapping (WebEndpointProperties webEndpointProperties, Environment environment, String basePath) {
-		return webEndpointProperties.getDiscovery().isEnabled() && (StringUtils.hasText(basePath) || ManagementPortType.get(environment).equals(ManagementPortType.DIFFERENT));
+
+	private boolean shouldRegisterLinksMapping(WebEndpointProperties webEndpointProperties, Environment environment,
+			String basePath) {
+		return webEndpointProperties.getDiscovery().isEnabled() && (StringUtils.hasText(basePath)
+				|| ManagementPortType.get(environment).equals(ManagementPortType.DIFFERENT));
 	}
 
 }

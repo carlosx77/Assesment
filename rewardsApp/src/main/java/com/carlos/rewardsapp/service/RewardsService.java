@@ -1,6 +1,5 @@
 package com.carlos.rewardsapp.service;
 
-import java.math.BigDecimal;
 import java.time.Month;
 import java.util.Comparator;
 import java.util.List;
